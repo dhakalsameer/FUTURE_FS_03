@@ -2,25 +2,96 @@
 {% block title %}Booking | Unity Futsal{% endblock %}
 
 {% block content %}
-<section class="max-w-4xl mx-auto p-8">
-  <h2 class="text-3xl font-bold mb-4">Pricing & Booking</h2>
+{% extends 'futsal/base.html' %}
+{% block title %}Booking | Unity Futsal{% endblock %}
 
-  <div class="bg-white p-6 rounded shadow mb-6">
-    <p><strong>Price:</strong> Rs {{ futsal.price_per_hour }} / hour</p>
-    <p><strong>Open:</strong> {{ futsal.open_time }} – {{ futsal.close_time }}</p>
-    <p class="mt-2 text-sm text-gray-600">{{ futsal.rules }}</p>
+{% block content %}
+<section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center dark:text-gray-100">Our Flexible Pricing & Easy Booking</h2>
+
+  <div class="mb-12">
+    {% comment %}
+      General Futsal Information: This section displays general booking information like hourly rates, open/close times, and rules.
+      Expected context variables: futsal.price_per_hour, futsal.open_time, futsal.close_time, futsal.rules
+    {% endcomment %}
+    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 text-center border border-gray-100 dark:border-gray-700">
+      <p class="text-2xl font-bold text-green-700 mb-4 dark:text-green-400">Standard Hourly Rate: Rs {{ futsal.price_per_hour|default:"XXX" }} / hour</p>
+      <p class="text-lg text-gray-700 dark:text-gray-300 mb-2"><strong>Operating Hours:</strong> {{ futsal.open_time|default:"9:00 AM" }} – {{ futsal.close_time|default:"10:00 PM" }}</p>
+      <p class="text-sm text-gray-600 dark:text-gray-400">{{ futsal.rules|default:"Booking is subject to availability. Please arrive 15 minutes prior to your slot. No outdoor shoes allowed on the court." }}</p>
+    </div>
   </div>
 
-  <form method="post" class="bg-white p-6 rounded shadow space-y-4">
-    {% csrf_token %}
-    <input name="name" placeholder="Your Name" required class="w-full p-2 border rounded">
-    <input name="phone" placeholder="Phone Number" required class="w-full p-2 border rounded">
-    <input type="date" name="date" required class="w-full p-2 border rounded">
-    <input name="time_slot" placeholder="Time Slot (e.g. 6–7 PM)" required class="w-full p-2 border rounded">
+  <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center dark:text-gray-100">Choose Your Plan</h3>
+  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% comment %}
+      Dynamic Pricing Plans: Iterate over a list of pricing_plan objects.
+      Each pricing_plan object should have:
+      - name (e.g., 'Standard', 'Premium', 'Membership')
+      - price (e.g., 'Rs 500', 'Rs 2000/month')
+      - description (optional short description)
+      - features (list of strings, e.g., ['1 hour play', 'Basic equipment'])
+      - call_to_action_url (optional, for specific booking link)
+    {% endcomment %}
+    {% for plan in pricing_plans %}
+      <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 flex flex-col justify-between transform hover:scale-105 transition duration-300 ease-in-out border border-green-200 dark:border-green-600">
+        <div>
+          <h4 class="text-3xl font-bold text-green-700 mb-4 text-center dark:text-green-400">{{ plan.name }}</h4>
+          <p class="text-5xl font-extrabold text-gray-900 mb-6 text-center dark:text-gray-100">{{ plan.price }}</p>
+          {% if plan.description %}
+            <p class="text-gray-600 dark:text-gray-300 text-center mb-6">{{ plan.description }}</p>
+          {% endif %}
+          <ul class="text-gray-700 dark:text-gray-300 mb-8 space-y-3">
+            {% for feature in plan.features %}
+              <li class="flex items-center">
+                <svg class="w-6 h-6 mr-3 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span>{{ feature }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <a href="{{ plan.call_to_action_url|default:'#' }}" class="block w-full text-center bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition duration-300 dark:bg-green-800 dark:hover:bg-green-900">
+          Select Plan
+        </a>
+      </div>
+    {% empty %}
+      <p class="col-span-full text-center text-gray-600 dark:text-gray-400">No pricing plans available yet. Please check back later!</p>
+    {% endfor %}
+  </div>
 
-    <button class="bg-green-600 text-white px-6 py-2 rounded">
-      Submit Booking
-    </button>
-  </form>
+  <h3 class="text-3xl font-bold text-gray-900 mt-16 mb-8 text-center dark:text-gray-100">Book Your Slot</h3>
+  <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 max-w-2xl mx-auto border border-gray-100 dark:border-gray-700">
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Name</label>
+        <input type="text" name="name" id="name" placeholder="John Doe" required
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+      </div>
+      <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
+        <input type="tel" name="phone" id="phone" placeholder="+1 (555) 123-4567" required
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+      </div>
+      <div>
+        <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Date</label>
+        <input type="date" name="date" id="date" required
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+      </div>
+      <div>
+        <label for="time_slot" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Time Slot</label>
+        <input type="text" name="time_slot" id="time_slot" placeholder="e.g., 6:00 PM - 7:00 PM" required
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+      </div>
+      <div>
+        <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Any Special Requests?</label>
+        <textarea name="notes" id="notes" rows="3" placeholder="e.g., Need equipment, specific court"
+                  class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
+      </div>
+      <button type="submit" class="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-900 transition duration-300">
+        Submit Booking Request
+      </button>
+    </form>
+  </div>
 </section>
+{% endblock %}
 {% endblock %}
