@@ -5,11 +5,11 @@
 {% block content %}
 <section class="relative bg-gradient-to-r from-green-600 to-green-800 text-white py-20 px-4 sm:px-6 lg:px-8 text-center dark:from-green-800 dark:to-green-900 overflow-hidden" style="background-image: url('https://via.placeholder.com/1500x500/10B981/FFFFFF?text=Futsal+Arena'); background-size: cover; background-position: center;">
   <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay for text readability -->
-  <div class="relative z-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
-    <h2 class="text-5xl font-extrabold mb-4 leading-tight transform -translate-y-4 opacity-0 animate-slide-in-up" style="animation-delay: 0.4s;">{{ futsal.name|default:"Unity Futsal Arena" }}</h2>
-    <p class="text-xl mb-8 opacity-0 transform -translate-y-4 animate-slide-in-up" style="animation-delay: 0.6s;">{{ futsal.tagline|default:"Your ultimate destination for thrilling futsal action!" }}</p>
+  <div class="relative z-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
+    <h2 class="text-5xl font-extrabold mb-4 leading-tight transform -translate-y-4 opacity-0 animate-slide-in-up" data-animation-delay="0.4">{{ futsal.name|default:"Unity Futsal Arena" }}</h2>
+    <p class="text-xl mb-8 opacity-0 transform -translate-y-4 animate-slide-in-up" data-animation-delay="0.6">{{ futsal.tagline|default:"Your ultimate destination for thrilling futsal action!" }}</p>
 
-    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.8s;">
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 opacity-0 animate-fade-in-up" data-animation-delay="0.8">
       <a href="tel:{{ futsal.phone|default:'#' }}" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-white hover:bg-gray-100 dark:text-green-900 dark:bg-gray-200 dark:hover:bg-gray-300 transition duration-300 shadow-md">
         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
         {{ futsal.phone|default:"Call Now" }}
@@ -56,7 +56,7 @@
 
 
 <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-  <h3 class="text-3xl font-bold text-gray-800 mb-10 text-center dark:text-gray-100 opacity-0 animate-fade-in-up" style="animation-delay: 1.0s;">Our State-of-the-Art Facilities</h3>
+  <h3 class="text-3xl font-bold text-gray-800 mb-10 text-center dark:text-gray-100 opacity-0 animate-fade-in-up" data-animation-delay="1.0">Our State-of-the-Art Facilities</h3>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {% comment %}
       Dynamic Facilities: Iterate over a list of facility objects.
@@ -65,7 +65,7 @@
       context = {'facilities': [{'title': 'Indoor Court', 'description': 'All-weather, professional-grade indoor futsal court.', 'image_url': 'https://via.placeholder.com/400x250/10B981/FFFFFF?text=Facility+1'}, ...]}
     {% endcomment %}
     {% for facility in facilities %}
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out opacity-0 animate-fade-in-up" style="animation-delay: {{ forloop.counter | add:1 | mul:0.2 }}s;">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out opacity-0 animate-fade-in-up" data-animation-delay="{{ forloop.counter | add:1 | mul:0.2 }}">
         <img src="{{ facility.image_url|default:'https://via.placeholder.com/400x250/10B981/FFFFFF?text=Futsal+Facility' }}" alt="{{ facility.title }}" class="w-full h-48 object-cover">
         <div class="p-6">
           <h4 class="text-xl font-semibold text-green-700 mb-3 dark:text-green-400">{{ facility.title }}</h4>
@@ -73,13 +73,13 @@
         </div>
       </div>
     {% empty %}
-      <p class="col-span-full text-center text-gray-600 dark:text-gray-400 opacity-0 animate-fade-in-up" style="animation-delay: 1.2s;">No facilities listed yet. Check back soon!</p>
+      <p class="col-span-full text-center text-gray-600 dark:text-gray-400 opacity-0 animate-fade-in-up" data-animation-delay="1.2">No facilities listed yet. Check back soon!</p>
     {% endfor %}
   </div>
 </section>
 
 <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto bg-gray-50 dark:bg-gray-900">
-  <h3 class="text-3xl font-bold text-gray-800 mb-10 text-center dark:text-gray-100 opacity-0 animate-fade-in-up" style="animation-delay: {{ facilities|length | add:1 | mul:0.2 }}s;">Gallery: Moments of Glory</h3>
+  <h3 class="text-3xl font-bold text-gray-800 mb-10 text-center dark:text-gray-100 opacity-0 animate-fade-in-up" data-animation-delay="{{ facilities|length | add:1 | mul:0.2 }}">Gallery: Moments of Glory</h3>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     {% comment %}
       Dynamic Gallery: Iterate over a list of image objects.
@@ -92,15 +92,26 @@
       ]}
     {% endcomment %}
     {% for img in gallery %}
-      <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group opacity-0 animate-fade-in-up" style="animation-delay: {{ forloop.counter | add:facilities|length | add:1 | mul:0.2 }}s;">
+      <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden group opacity-0 animate-fade-in-up" data-animation-delay="{{ forloop.counter | add:facilities|length | add:1 | mul:0.2 }}">
         <img src="{{ img.image.url|default:'https://via.placeholder.com/600x400/3B82F6/FFFFFF?text=Futsal+Moment' }}" alt="{{ img.caption }}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110">
         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <p class="text-white text-lg font-semibold">{{ img.caption }}</p>
         </div>
       </div>
     {% empty %}
-      <p class="col-span-full text-center text-gray-600 dark:text-gray-400 opacity-0 animate-fade-in-up" style="animation-delay: {{ facilities|length | add:gallery|length | add:1 | mul:0.2 }}s;">No gallery images available yet.</p>
+      <p class="col-span-full text-center text-gray-600 dark:text-gray-400 opacity-0 animate-fade-in-up" data-animation-delay="{{ facilities|length | add:gallery|length | add:1 | mul:0.2 }}">No gallery images available yet.</p>
     {% endfor %}
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-animation-delay]').forEach(element => {
+      const delay = element.getAttribute('data-animation-delay');
+      if (delay) {
+        element.style.animationDelay = `${delay}s`;
+      }
+    });
+  });
+</script>
 {% endblock %}
