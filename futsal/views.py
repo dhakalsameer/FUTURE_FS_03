@@ -49,3 +49,19 @@ def about(request):
         'futsal': futsal,
         'facilities': facilities
     })
+
+
+# 4️⃣ CONTACT PAGE
+def contact(request):
+    futsal = FutsalInfo.objects.first()
+
+    if request.method == 'POST':
+        ContactMessage.objects.create(
+            name=request.POST.get('name'),
+            email=request.POST.get('email'),
+            message=request.POST.get('message'),
+        )
+        messages.success(request, 'Message sent successfully!')
+        return redirect('contact')
+
+    return render(request, 'futsal/contact.html', {'futsal': futsal})
