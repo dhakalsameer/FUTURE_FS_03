@@ -15,7 +15,7 @@ class FutsalInfoAdmin(admin.ModelAdmin):
 
 @admin.register(Facility)
 class FacilityAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('title',)
 
 
 @admin.register(Booking)
@@ -33,4 +33,4 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(GalleryImage)
 class GalleryImageAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('caption',)
