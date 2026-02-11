@@ -1,0 +1,30 @@
+{% extends 'futsal/base.html' %}
+{% block title %}Home | Unity Futsal{% endblock %}
+
+{% block content %}
+<section class="bg-green-700 text-white text-center p-12">
+  <h2 class="text-4xl font-bold mb-2">{{ futsal.name }}</h2>
+  <p class="text-lg mb-6">{{ futsal.tagline }}</p>
+
+  <div class="space-x-4">
+    <a href="tel:{{ futsal.phone }}" class="bg-white text-green-700 px-6 py-2 rounded font-semibold">
+      📞 Call Now
+    </a>
+    <a href="https://wa.me/{{ futsal.whatsapp }}" class="bg-black px-6 py-2 rounded font-semibold">
+      💬 WhatsApp
+    </a>
+  </div>
+</section>
+
+<section class="p-8 max-w-5xl mx-auto">
+  <h3 class="text-2xl font-bold mb-4">Facilities</h3>
+  <div class="grid md:grid-cols-3 gap-4">
+    {% for facility in facilities %}
+      <div class="bg-white p-4 rounded shadow">
+        <h4 class="font-semibold">{{ facility.name }}</h4>
+        <p class="text-sm">{{ facility.description }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
