@@ -9,10 +9,15 @@
     {% comment %}
       User-specified images for background slideshow.
       These can be dynamically loaded via 'hero_background_images' context variable from the view.
-      Example: context = {'hero_background_images': [{'image_url': static('futsal/images/images(1).jpeg')}, {'image_url': static('futsal/images/futsal.jpeg')}]}
+      Example: context = {'hero_background_images': [
+        {'image_url': static('futsal/images/images(1).jpeg')},
+        {'image_url': static('futsal/images/futsal.jpeg')},
+        {'image_url': static('futsal/images/futsal_hero_3.jpeg')} {# New image #}
+      ]}
     {% endcomment %}
     <div class="slideshow-image" style="background-image: url('{% static 'futsal/images/images(1).jpeg' %}');"></div>
     <div class="slideshow-image" style="background-image: url('{% static 'futsal/images/futsal.jpeg' %}');"></div>
+    <div class="slideshow-image" style="background-image: url('{% static 'futsal/images/futsal_hero_3.jpeg' %}');"></div> {# New image #}
   </div>
   <div class="absolute inset-0 bg-black opacity-50 z-20"></div> <!-- Overlay for text readability, above images -->
   <div class="relative z-30 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
@@ -89,7 +94,7 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    animation: slideshow-fade 8s infinite; /* 2 images * 4s per image = 8s cycle */
+    animation: slideshow-fade 12s infinite; /* 3 images * 4s per image = 12s cycle */
   }
 
   .slideshow-image:nth-child(1) {
@@ -98,13 +103,16 @@
   .slideshow-image:nth-child(2) {
     animation-delay: 4s;
   }
-  /* Remove :nth-child(3) rule as there are only 2 images now */
+  .slideshow-image:nth-child(3) {
+    animation-delay: 8s;
+  }
+  /* Add more :nth-child rules if you add more dynamic images */
 
   @keyframes slideshow-fade {
     0% { opacity: 0; }
-    12.5% { opacity: 1; } /* Fade in (1s for 8s cycle) */
-    37.5% { opacity: 1; } /* Hold (3s for 8s cycle) */
-    50% { opacity: 0; } /* Fade out (1s for 8s cycle) */
+    8% { opacity: 1; } /* Fade in */
+    25% { opacity: 1; } /* Hold */
+    33% { opacity: 0; } /* Fade out */
     100% { opacity: 0; }
   }
 </style>
