@@ -3,27 +3,21 @@
 {% block title %}Home | Unity Futsal{% endblock %}
 
 {% block content %}
+{% extends 'futsal/base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block title %}Home | Unity Futsal{% endblock %}
+
+{% block content %}
 <section class="relative bg-gradient-to-r from-green-600 to-green-800 text-white py-20 px-4 sm:px-6 lg:px-8 text-center dark:from-green-800 dark:to-green-900 overflow-hidden hero-slideshow">
   <div class="hero-slideshow-backgrounds">
     {% comment %}
-      Dynamic Hero Background Images: Iterate over a list of image objects.
-      Each image object should have 'image_url' attribute.
-      Example usage in Django view:
-      context = {'hero_background_images': [
-        {'image_url': 'https://via.placeholder.com/1500x500/10B981/FFFFFF?text=Futsal+Hero+1'},
-        {'image_url': 'https://via.placeholder.com/1500x500/007bff/FFFFFF?text=Futsal+Hero+2'},
-        {'image_url': 'https://via.placeholder.com/1500x500/ffc107/FFFFFF?text=Futsal+Hero+3'}
-      ]}
+      User-specified images for background slideshow.
+      These can be dynamically loaded via 'hero_background_images' context variable from the view.
+      Example: context = {'hero_background_images': [{'image_url': static('futsal/images/images(1).jpeg')}, {'image_url': static('futsal/images/futsal.jpeg')}]}
     {% endcomment %}
-    {% if hero_background_images %}
-      {% for img in hero_background_images %}
-        <div class="slideshow-image" style="background-image: url('{{ img.image_url }}');"></div>
-      {% endfor %}
-    {% else %}
-      <div class="slideshow-image" style="background-image: url('https://via.placeholder.com/1500x500/10B981/FFFFFF?text=Futsal+Hero+1');"></div>
-      <div class="slideshow-image" style="background-image: url('https://via.placeholder.com/1500x500/007bff/FFFFFF?text=Futsal+Hero+2');"></div>
-      <div class="slideshow-image" style="background-image: url('https://via.placeholder.com/1500x500/ffc107/FFFFFF?text=Futsal+Hero+3');"></div>
-    {% endif %}
+    <div class="slideshow-image" style="background-image: url('{% static 'futsal/images/images(1).jpeg' %}');"></div>
+    <div class="slideshow-image" style="background-image: url('{% static 'futsal/images/futsal.jpeg' %}');"></div>
   </div>
   <div class="absolute inset-0 bg-black opacity-50 z-20"></div> <!-- Overlay for text readability, above images -->
   <div class="relative z-30 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
@@ -100,7 +94,7 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    animation: slideshow-fade 12s infinite; /* 3 images * 4s per image = 12s cycle */
+    animation: slideshow-fade 8s infinite; /* 2 images * 4s per image = 8s cycle */
   }
 
   .slideshow-image:nth-child(1) {
@@ -109,16 +103,13 @@
   .slideshow-image:nth-child(2) {
     animation-delay: 4s;
   }
-  .slideshow-image:nth-child(3) {
-    animation-delay: 8s;
-  }
-  /* Add more :nth-child rules if you add more dynamic images */
+  /* Remove :nth-child(3) rule as there are only 2 images now */
 
   @keyframes slideshow-fade {
     0% { opacity: 0; }
-    8% { opacity: 1; } /* Fade in */
-    25% { opacity: 1; } /* Hold */
-    33% { opacity: 0; } /* Fade out */
+    12.5% { opacity: 1; } /* Fade in (1s for 8s cycle) */
+    37.5% { opacity: 1; } /* Hold (3s for 8s cycle) */
+    50% { opacity: 0; } /* Fade out (1s for 8s cycle) */
     100% { opacity: 0; }
   }
 </style>
