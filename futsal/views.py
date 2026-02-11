@@ -45,7 +45,7 @@ def about(request):
     futsal = FutsalInfo.objects.first()
     facilities = Facility.objects.all()
 
-    return render(request, 'website/about.html', {
+    return render(request, 'futsal/about.html', {
         'futsal': futsal,
         'facilities': facilities
     })

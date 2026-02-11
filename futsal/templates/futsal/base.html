@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Futsal Arena{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-green-600 text-white p-4 flex justify-between">
+    <h1 class="font-bold text-xl">⚽ Futsal Arena</h1>
+    <div class="space-x-4">
+      <a href="{% url 'home' %}" class="hover:underline">Home</a>
+      <a href="{% url 'pricing' %}" class="hover:underline">Booking</a>
+      <a href="{% url 'about' %}" class="hover:underline">About</a>
+      <a href="{% url 'contact' %}" class="hover:underline">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Messages -->
+  {% if messages %}
+    <div class="p-4">
+      {% for message in messages %}
+        <div class="bg-green-200 text-green-800 p-2 rounded mb-2">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center p-4 mt-10">
+    © {{ now|date:"Y" }} Futsal Arena • All rights reserved
+  </footer>
+
+</body>
+</html>
