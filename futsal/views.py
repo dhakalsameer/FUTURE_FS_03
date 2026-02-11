@@ -37,3 +37,15 @@ def pricing_booking(request):
         return redirect('pricing')
 
     return render(request, 'futsal/pricing.html', {'futsal': futsal})
+
+
+
+# 3️⃣ ABOUT PAGE
+def about(request):
+    futsal = FutsalInfo.objects.first()
+    facilities = Facility.objects.all()
+
+    return render(request, 'website/about.html', {
+        'futsal': futsal,
+        'facilities': facilities
+    })
