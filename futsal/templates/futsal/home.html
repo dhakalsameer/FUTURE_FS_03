@@ -3,9 +3,30 @@
 {% block title %}Home | Unity Futsal{% endblock %}
 
 {% block content %}
-<section class="relative bg-gradient-to-r from-green-600 to-green-800 text-white py-20 px-4 sm:px-6 lg:px-8 text-center dark:from-green-800 dark:to-green-900 overflow-hidden" style="background-image: url('https://via.placeholder.com/1500x500/10B981/FFFFFF?text=Futsal+Arena'); background-size: cover; background-position: center;">
-  <div class="absolute inset-0 bg-black opacity-50"></div> <!-- Overlay for text readability -->
-  <div class="relative z-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
+<section class="relative bg-gradient-to-r from-green-600 to-green-800 text-white py-20 px-4 sm:px-6 lg:px-8 text-center dark:from-green-800 dark:to-green-900 overflow-hidden hero-slideshow">
+  <div class="hero-slideshow-backgrounds">
+    {% comment %}
+      Dynamic Hero Background Images: Iterate over a list of image objects.
+      Each image object should have 'image_url' attribute.
+      Example usage in Django view:
+      context = {'hero_background_images': [
+        {'image_url': 'https://via.placeholder.com/1500x500/10B981/FFFFFF?text=Futsal+Hero+1'},
+        {'image_url': 'https://via.placeholder.com/1500x500/007bff/FFFFFF?text=Futsal+Hero+2'},
+        {'image_url': 'https://via.placeholder.com/1500x500/ffc107/FFFFFF?text=Futsal+Hero+3'}
+      ]}
+    {% endcomment %}
+    {% if hero_background_images %}
+      {% for img in hero_background_images %}
+        <div class="slideshow-image" style="background-image: url('{{ img.image_url }}');"></div>
+      {% endfor %}
+    {% else %}
+      <div class="slideshow-image" style="background-image: url('https://via.placeholder.com/1500x500/10B981/FFFFFF?text=Futsal+Hero+1');"></div>
+      <div class="slideshow-image" style="background-image: url('https://via.placeholder.com/1500x500/007bff/FFFFFF?text=Futsal+Hero+2');"></div>
+      <div class="slideshow-image" style="background-image: url('https://via.placeholder.com/1500x500/ffc107/FFFFFF?text=Futsal+Hero+3');"></div>
+    {% endif %}
+  </div>
+  <div class="absolute inset-0 bg-black opacity-50 z-20"></div> <!-- Overlay for text readability, above images -->
+  <div class="relative z-30 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
     <h2 class="text-5xl font-extrabold mb-4 leading-tight transform -translate-y-4 opacity-0 animate-slide-in-up" data-animation-delay="0.4">{{ futsal.name|default:"Unity Futsal Arena" }}</h2>
     <p class="text-xl mb-8 opacity-0 transform -translate-y-4 animate-slide-in-up" data-animation-delay="0.6">{{ futsal.tagline|default:"Your ultimate destination for thrilling futsal action!" }}</p>
 
@@ -51,6 +72,54 @@
 
   .animate-slide-in-up {
     animation: slide-in-up 0.6s ease-out forwards;
+  }
+
+  /* Slideshow CSS */
+  .hero-slideshow {
+    position: relative;
+    height: 500px; /* Adjust height as needed */
+    background-color: #333; /* Fallback background */
+  }
+
+  .hero-slideshow-backgrounds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10; /* Below overlay, above section background */
+  }
+
+  .slideshow-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: slideshow-fade 12s infinite; /* 3 images * 4s per image = 12s cycle */
+  }
+
+  .slideshow-image:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .slideshow-image:nth-child(2) {
+    animation-delay: 4s;
+  }
+  .slideshow-image:nth-child(3) {
+    animation-delay: 8s;
+  }
+  /* Add more :nth-child rules if you add more dynamic images */
+
+  @keyframes slideshow-fade {
+    0% { opacity: 0; }
+    8% { opacity: 1; } /* Fade in */
+    25% { opacity: 1; } /* Hold */
+    33% { opacity: 0; } /* Fade out */
+    100% { opacity: 0; }
   }
 </style>
 
