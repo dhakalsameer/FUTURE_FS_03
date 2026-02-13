@@ -3,17 +3,25 @@
 
 {% block content %}
 <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-  <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center dark:text-gray-100">Our Flexible Pricing & Easy Booking</h2>
+  <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-700 dark:to-gray-900 rounded-lg shadow-lg p-8 mb-12 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-pattern-grid opacity-10 dark:opacity-5"></div>
+    <div class="relative z-10">
+      <div class="inline-block bg-green-200 dark:bg-green-700 rounded-full p-3 mb-4">
+        <svg class="w-8 h-8 text-green-700 dark:text-green-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </div>
+      <h2 class="text-4xl font-extrabold text-gray-900 mb-4 dark:text-gray-100">Our Flexible Pricing & Easy Booking</h2>
+      <p class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">Find the perfect plan for your futsal needs, from hourly rates to membership packages. Book your slot effortlessly and join the game!</p>
+    </div>
+  </div>
 
   <div class="mb-12">
-    {% comment %}
-      General Futsal Information: This section displays general booking information like hourly rates, open/close times, and rules.
-      Expected context variables: futsal.price_per_hour, futsal.open_time, futsal.close_time, futsal.rules
-    {% endcomment %}
-    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 text-center border border-gray-100 dark:border-gray-700">
-      <p class="text-2xl font-bold text-green-700 mb-4 dark:text-green-400">Standard Hourly Rate: Rs {{ futsal.price_per_hour|default:"XXX" }} / hour</p>
-      <p class="text-lg text-gray-700 dark:text-gray-300 mb-2"><strong>Operating Hours:</strong> {{ futsal.open_time|default:"9:00 AM" }} – {{ futsal.close_time|default:"10:00 PM" }}</p>
-      <p class="text-sm text-gray-600 dark:text-gray-400">{{ futsal.rules|default:"Booking is subject to availability. Please arrive 15 minutes prior to your slot. No outdoor shoes allowed on the court." }}</p>
+    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 text-center border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+        <div class="absolute inset-0 bg-pattern-dots opacity-5 dark:opacity-2"></div>
+        <div class="relative z-10">
+            <p class="text-2xl font-bold text-green-700 mb-4 dark:text-green-400">Standard Hourly Rate: Rs {{ futsal.price_per_hour|default:"XXX" }} / hour</p>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-2"><strong>Operating Hours:</strong> {{ futsal.open_time|default:"9:00 AM" }} – {{ futsal.close_time|default:"10:00 PM" }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{{ futsal.rules|default:"Booking is subject to availability. Please arrive 15 minutes prior to your slot. No outdoor shoes allowed on the court." }}</p>
+        </div>
     </div>
   </div>
 
@@ -29,7 +37,7 @@
       - call_to_action_url (optional, for specific booking link)
     {% endcomment %}
     {% for plan in pricing_plans %}
-      <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 flex flex-col justify-between transform hover:scale-105 transition duration-300 ease-in-out border border-green-200 dark:border-green-600">
+      <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 flex flex-col justify-between transform hover:-translate-y-4 hover:scale-105 hover:rotate-1 transition duration-300 ease-in-out border-2 border-green-200 dark:border-green-600 transition-colors">
         <div>
           <h4 class="text-3xl font-bold text-green-700 mb-4 text-center dark:text-green-400">{{ plan.name }}</h4>
           <p class="text-5xl font-extrabold text-gray-900 mb-6 text-center dark:text-gray-100">{{ plan.price }}</p>
@@ -61,27 +69,27 @@
       <div>
         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Name</label>
         <input type="text" name="name" id="name" placeholder="John Doe" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
       </div>
       <div>
         <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
         <input type="tel" name="phone" id="phone" placeholder="+1 (555) 123-4567" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
       </div>
       <div>
         <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Date</label>
         <input type="date" name="date" id="date" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
       </div>
       <div>
         <label for="time_slot" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Time Slot</label>
         <input type="text" name="time_slot" id="time_slot" placeholder="e.g., 6:00 PM - 7:00 PM" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
       </div>
       <div>
         <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Any Special Requests?</label>
         <textarea name="notes" id="notes" rows="3" placeholder="e.g., Need equipment, specific court"
-                  class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
+                  class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
       </div>
       <button type="submit" class="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-900 transition duration-300">
         Submit Booking Request
