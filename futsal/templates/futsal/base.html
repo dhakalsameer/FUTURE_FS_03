@@ -7,6 +7,41 @@
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Manual Dark Mode Overrides for Tailwind CDN issues */
+    html.dark body {
+      background-color: #111827; /* dark:bg-gray-900 */
+      color: #f3f4f6; /* dark:text-gray-100 */
+    }
+    html.dark nav {
+        background-color: #064e3b !important; /* dark:bg-green-900 */
+    }
+    html.dark #mobile-menu {
+        background-color: #052e16 !important; /* dark:bg-green-950 */
+    }
+    html.dark footer {
+        background-color: #1f2937 !important; /* dark:bg-gray-800 */
+    }
+    html.dark .bg-green-200.text-green-800 { /* For messages block */
+        background-color: #064e3b !important; /* dark:bg-green-800, using green-900 as a closer match */
+        color: #d1fae5 !important; /* dark:text-green-200 */
+    }
+    /* General text color for dark mode */
+    html.dark .text-gray-800 { color: #f3f4f6 !important; } /* light mode text, force to dark mode text */
+    html.dark .text-gray-400 { color: #9ca3af !important; } /* default light gray, make it lighter in dark mode */
+    html.dark .text-green-400 { color: #34d399 !important; } /* green-400, make it brighter in dark mode */
+    html.dark .text-white { color: #e5e7eb !important; } /* white text for dark mode */
+    html.dark .bg-white { background-color: #1f2937 !important; } /* White elements to dark gray */
+
+    /* Card background and text */
+    html.dark .bg-white.dark\:bg-gray-800 {
+      background-color: #1f2937 !important; /* Ensure card background is dark */
+    }
+    html.dark .dark\:text-gray-100 { color: #f3f4f6 !important; }
+    html.dark .dark\:text-gray-300 { color: #d1d5db !important; }
+    html.dark .dark\:text-gray-400 { color: #9ca3af !important; }
+  </style>
 </head>
 <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
