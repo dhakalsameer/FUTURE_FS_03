@@ -100,7 +100,11 @@
   @keyframes card-slide-in {
     from {
       opacity: 0;
-      transform: translateY(30px) scale(0.95);
+      transform: translateY(50px) scale(0.9); /* More pronounced starting point */
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(-5px) scale(1.02); /* Overshoot slightly */
     }
     to {
       opacity: 1;
@@ -128,7 +132,7 @@
       context = {'facilities': [{'title': 'Indoor Court', 'description': 'All-weather, professional-grade indoor futsal court.', 'image_url': 'https://via.placeholder.com/400x250/10B981/FFFFFF?text=Facility+1'}, ...]}
     {% endcomment %}
     {% for facility in facilities %}
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition duration-300 ease-in-out animate-card-slide-in group relative" data-animation-delay="{{ forloop.counter | add:1 | mul:0.2 }}">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition duration-300 ease-in-out animate-card-slide-in group relative border-2 border-transparent group-hover:border-green-500" data-animation-delay="{{ forloop.counter | add:1 | mul:0.2 }}">
         <div class="relative h-48 w-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('{% if facility.image %}{{ facility.image.url }}{% else %}{% static "gallery/futsal.jpg" %}{% endif %}');">
           <div class="absolute inset-0 bg-black opacity-40 group-hover:opacity-70 transition-opacity duration-300"></div>
         </div>
