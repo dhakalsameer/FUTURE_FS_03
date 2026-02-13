@@ -78,13 +78,26 @@
       </div>
       <div>
         <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Date</label>
-        <input type="date" name="date" id="date" required
+        <input type="date" name="date" id="date" required value="{{ selected_date }}"
+               onchange="this.form.action = '?date=' + this.value; this.form.method = 'get'; this.form.submit();"
                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
       </div>
       <div>
         <label for="time_slot" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Time Slot</label>
-        <input type="text" name="time_slot" id="time_slot" placeholder="e.g., 6:00 PM - 7:00 PM" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+        <select name="time_slot" id="time_slot" required
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+            <option value="" disabled selected>Select a time slot</option>
+            {% for slot in all_possible_time_slots %}
+                {% if slot in available_slots %}
+                    <option value="{{ slot }}">{{ slot }} (Available)</option>
+                {% else %}
+                    <option value="{{ slot }}" disabled class="bg-gray-200 dark:bg-gray-600 text-gray-500">
+                        {{ slot }} (Booked)
+                    </option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Slots are for the date: {{ selected_date }}</p>
       </div>
       <div>
         <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Any Special Requests?</label>
