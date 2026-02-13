@@ -174,8 +174,8 @@
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-animation-delay]').forEach(element => {
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-animation-delay]').forEach(function(element) {
       const delay = element.getAttribute('data-animation-delay');
       if (delay) {
         element.style.animationDelay = `${delay}s`;
