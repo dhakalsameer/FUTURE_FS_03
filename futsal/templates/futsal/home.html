@@ -15,9 +15,11 @@
         {'image_url': static('futsal/images/futsal_hero_3.jpeg')} {# New image #}
       ]}
     {% endcomment %}
-    <div class="slideshow-image" style="background-image: url('{% static 'gallery/futsal.jpg' %}');"></div>
-    <div class="slideshow-image" style="background-image: url('{% static 'gallery/images.jpeg' %}');"></div>
-    <div class="slideshow-image" style="background-image: url('{% static 'gallery/images (1).jpeg' %}');"></div>
+    <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/futsal.jpg' %}&quot;); animation-delay: 0s;"></div>
+    <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/images.jpeg' %}&quot;); animation-delay: 4s;"></div>
+    <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/images (1).jpeg' %}&quot;); animation-delay: 8s;"></div>
+    <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/night.webp' %}&quot;); animation-delay: 12s;"></div>
+    <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/scoreboard.png' %}&quot;); animation-delay: 16s;"></div>
   </div>
   <div class="absolute inset-0 bg-black opacity-50 z-20"></div> <!-- Overlay for text readability, above images -->
   <div class="relative z-30 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
@@ -94,18 +96,9 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    animation: slideshow-fade 12s infinite; /* 3 images * 4s per image = 12s cycle */
+    animation: slideshow-fade 20s infinite; /* 5 images * 4s per image = 20s cycle */
   }
 
-  .slideshow-image:nth-child(1) {
-    animation-delay: 0s;
-  }
-  .slideshow-image:nth-child(2) {
-    animation-delay: 4s;
-  }
-  .slideshow-image:nth-child(3) {
-    animation-delay: 8s;
-  }
   /* Add more :nth-child rules if you add more dynamic images */
 
   @keyframes slideshow-fade {
