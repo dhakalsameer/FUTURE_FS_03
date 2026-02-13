@@ -10,16 +10,12 @@
       User-specified images for background slideshow.
       These can be dynamically loaded via 'hero_background_images' context variable from the view.
       Example: context = {'hero_background_images': [
-        {'image_url': static('futsal/images/images(1).jpeg')},
-        {'image_url': static('futsal/images/futsal.jpeg')},
-        {'image_url': static('futsal/images/futsal_hero_3.jpeg')} {# New image #}
       ]}
     {% endcomment %}
     <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/attack.jpg' %}&quot;); animation-delay: 0s;"></div>
     <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/ball.jpg' %}&quot;); animation-delay: 4s;"></div>
     <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/boot.jpg' %}&quot;); animation-delay: 8s;"></div>
     <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/futsal.jpg' %}&quot;); animation-delay: 12s;"></div>
-    <div class="slideshow-image" style="background-image: url(&quot;{% static 'gallery/ground.jpeg' %}&quot;); animation-delay: 16s;"></div>
   </div>
   <div class="absolute inset-0 bg-black opacity-50 z-20"></div> <!-- Overlay for text readability, above images -->
   <div class="relative z-30 max-w-3xl mx-auto opacity-0 animate-fade-in-up" data-animation-delay="0.2">
@@ -101,6 +97,17 @@
 
   /* Add more :nth-child rules if you add more dynamic images */
 
+  @keyframes card-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   @keyframes slideshow-fade {
     0% { opacity: 0; }
     8% { opacity: 1; } /* Fade in */
@@ -121,8 +128,8 @@
       context = {'facilities': [{'title': 'Indoor Court', 'description': 'All-weather, professional-grade indoor futsal court.', 'image_url': 'https://via.placeholder.com/400x250/10B981/FFFFFF?text=Facility+1'}, ...]}
     {% endcomment %}
     {% for facility in facilities %}
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition duration-300 ease-in-out opacity-0 animate-fade-in-up group relative" data-animation-delay="{{ forloop.counter | add:1 | mul:0.2 }}">
-        <div class="relative h-48 w-full bg-cover bg-center" style="background-image: url('{% if facility.image %}{{ facility.image.url }}{% else %}{% static "gallery/futsal.jpg" %}{% endif %}');">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 hover:shadow-xl transition duration-300 ease-in-out opacity-0 animate-card-slide-in group relative" data-animation-delay="{{ forloop.counter | add:1 | mul:0.2 }}">
+        <div class="relative h-48 w-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('{% if facility.image %}{{ facility.image.url }}{% else %}{% static "gallery/futsal.jpg" %}{% endif %}');">
           <div class="absolute inset-0 bg-black opacity-40 group-hover:opacity-70 transition-opacity duration-300"></div>
         </div>
         <div class="p-6 pt-2">
