@@ -136,23 +136,14 @@
         if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.toggle('hidden');
         if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.toggle('hidden');
 
-        // If set via local storage previously
-        if (localStorage.getItem('theme')) {
-            if (localStorage.getItem('theme') === 'light') {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
+        // Toggle 'dark' class on <html> element
+        document.documentElement.classList.toggle('dark');
+
+        // Update localStorage
+        if (document.documentElement.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
         } else {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
+            localStorage.setItem('theme', 'light');
         }
     }
 
