@@ -12,6 +12,7 @@ from django.contrib import messages
 def home(request):
     futsal = FutsalInfo.objects.first()
     facilities = Facility.objects.all()
+    print("Facilities queryset:", facilities)
     gallery = GalleryImage.objects.all()
 
     context = {
