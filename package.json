@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-tailwind": "tailwindcss -i futsal/static/src/input.css -o futsal/static/dist/output.css"
+    "build-tailwind": "npx @tailwindcss/cli -i futsal/static/src/input.css -o futsal/static/dist/output.css"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/dhakalsameer/FUTURE_FS_03#readme",
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
     "autoprefixer": "^10.4.24",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18"
