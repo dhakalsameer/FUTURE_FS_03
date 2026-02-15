@@ -19,13 +19,13 @@
         <div class="absolute inset-0 bg-pattern-dots opacity-5 dark:opacity-2"></div>
         <div class="relative z-10">
             <p class="text-2xl font-bold text-green-700 mb-4 dark:text-green-400">Standard Hourly Rate: Rs {{ futsal.price_per_hour|default:"XXX" }} / hour</p>
-            <p class="text-lg text-gray-700 dark:text-gray-300 mb-2"><strong>Operating Hours:</strong> {{ futsal.open_time|default:"9:00 AM" }} – {{ futsal.close_time|default:"10:00 PM" }}</p>
-            <p class="text-sm text-gray-600 dark:text-gray-400">{{ futsal.rules|default:"Booking is subject to availability. Please arrive 15 minutes prior to your slot. No outdoor shoes allowed on the court." }}</p>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-2"><strong>Operating Hours:</strong> {{ futsal.opening_time|default:"9:00 AM" }} – {{ futsal.closing_time|default:"10:00 PM" }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Booking is subject to availability. Please arrive 15 minutes prior to your slot. No outdoor shoes allowed on the court. Cancellations must be made 24 hours in advance.</p>
         </div>
     </div>
   </div>
 
-  <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center dark:text-gray-100">Choose Your Plan</h3>
+  <h3 class="text-4xl font-extrabold text-gray-900 mb-12 text-center dark:text-white">Choose Your <span class="text-green-600">Plan</span></h3>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {% comment %}
       Dynamic Pricing Plans: Iterate over a list of pricing_plan objects.
@@ -58,34 +58,37 @@
         </a>
       </div>
     {% empty %}
-      <p class="col-span-full text-center text-gray-600 dark:text-gray-400">No pricing plans available yet. Please check back later!</p>
+      <div class="col-span-full bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 text-center border-l-4 border-green-500 dark:border-green-400">
+        <p class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">No pricing plans available yet.</p>
+        <p class="text-gray-600 dark:text-gray-300">We are currently preparing our new range of flexible pricing plans. Please check back soon or contact us for custom options!</p>
+      </div>
     {% endfor %}
   </div>
 
-  <h3 class="text-3xl font-bold text-gray-900 mt-16 mb-8 text-center dark:text-gray-100">Book Your Slot</h3>
+  <h3 class="text-4xl font-extrabold text-gray-900 mt-16 mb-12 text-center dark:text-white">Book Your <span class="text-green-600">Slot</span></h3>
   <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 max-w-2xl mx-auto border border-gray-100 dark:border-gray-700">
     <form method="post" class="space-y-6">
       {% csrf_token %}
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Your Name</label>
+        <label for="name" class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
         <input type="text" name="name" id="name" placeholder="John Doe" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 text-base">
       </div>
       <div>
-        <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
+        <label for="phone" class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
         <input type="tel" name="phone" id="phone" placeholder="+1 (555) 123-4567" required
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 text-base">
       </div>
       <div>
-        <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Date</label>
+        <label for="date" class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Preferred Date</label>
         <input type="date" name="date" id="date" required value="{{ selected_date }}"
                onchange="this.form.action = '?date=' + this.value; this.form.method = 'get'; this.form.submit();"
-               class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 text-base">
       </div>
       <div>
-        <label for="time_slot" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Preferred Time Slot</label>
+        <label for="time_slot" class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Preferred Time Slot</label>
         <select name="time_slot" id="time_slot" required
-                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 text-base">
             <option value="" disabled selected>Select a time slot</option>
             {% for slot in all_possible_time_slots %}
                 {% if slot in available_slots %}
@@ -97,14 +100,14 @@
                 {% endif %}
             {% endfor %}
         </select>
-        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Slots are for the date: {{ selected_date }}</p>
+        <p class="mt-3 text-sm text-gray-500 dark:text-gray-400">Slots are for the date: {{ selected_date }}</p>
       </div>
       <div>
-        <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Any Special Requests?</label>
-        <textarea name="notes" id="notes" rows="3" placeholder="e.g., Need equipment, specific court"
-                  class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"></textarea>
+        <label for="notes" class="block text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">Any Special Requests?</label>
+        <textarea name="notes" id="notes" rows="4" placeholder="e.g., Need equipment, specific court"
+                  class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 text-base"></textarea>
       </div>
-      <button type="submit" class="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-900 transition duration-300">
+      <button type="submit" class="w-full inline-flex justify-center py-4 px-6 border border-transparent shadow-lg text-lg font-semibold rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:bg-green-700 dark:hover:bg-green-900 transition duration-300 transform hover:scale-105">
         Submit Booking Request
       </button>
     </form>
