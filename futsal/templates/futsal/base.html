@@ -5,72 +5,38 @@
   <title>{% block title %}Unity Futsal{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Link to locally compiled Tailwind CSS -->
   <link href="{% load static %}{% static 'dist/output.css' %}" rel="stylesheet">
-
-
-
-  <style>
-    /* Manual Dark Mode Overrides for Tailwind CDN issues */
-    html.dark body {
-      background-color: #111827; /* dark:bg-gray-900 */
-      color: #f3f4f6; /* dark:text-gray-100 */
-    }
-    html.dark nav {
-        background-color: #064e3b !important; /* dark:bg-green-900 */
-    }
-    html.dark #mobile-menu {
-        background-color: #052e16 !important; /* dark:bg-green-950 */
-    }
-    html.dark footer {
-        background-color: #1f2937 !important; /* dark:bg-gray-800 */
-    }
-    html.dark .bg-green-200.text-green-800 { /* For messages block */
-        background-color: #064e3b !important; /* dark:bg-green-800, using green-900 as a closer match */
-        color: #d1fae5 !important; /* dark:text-green-200 */
-    }
-    /* General text color for dark mode */
-    html.dark .text-gray-800 { color: #f3f4f6 !important; } /* light mode text, force to dark mode text */
-    html.dark .text-gray-400 { color: #9ca3af !important; } /* default light gray, make it lighter in dark mode */
-    html.dark .text-green-400 { color: #34d399 !important; } /* green-400, make it brighter in dark mode */
-    html.dark .text-white { color: #e5e7eb !important; } /* white text for dark mode */
-    html.dark .bg-white { background-color: #1f2937 !important; } /* White elements to dark gray */
-
-    /* Card background and text */
-    html.dark .bg-white.dark\:bg-gray-800 {
-      background-color: #1f2937 !important; /* Ensure card background is dark */
-    }
-    html.dark .dark\:text-gray-100 { color: #f3f4f6 !important; }
-    html.dark .dark\:text-gray-300 { color: #d1d5db !important; }
-    html.dark .dark\:text-gray-400 { color: #9ca3af !important; }
-  </style>
 </head>
-<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col font-sans">
 
   <!-- Navbar -->
-  <nav class="bg-green-700 text-white p-4 sticky top-0 z-50 shadow-lg dark:bg-green-900">
+  <nav class="bg-green-800 text-white p-4 sticky top-0 z-50 shadow-xl dark:bg-green-950">
     <div class="container mx-auto flex justify-between items-center">
-      <a href="{% url 'home' %}" class="text-2xl font-extrabold flex items-center hover:text-green-200 transition duration-300">
-        ⚽ <span class="ml-2">Unity Futsal</span>
+      <a href="{% url 'home' %}" class="text-3xl font-extrabold flex items-center hover:text-green-300 transition duration-300 ease-in-out transform hover:scale-105">
+        ⚽ <span class="ml-3">Unity Futsal</span>
       </a>
 
       <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-6">
-        <a href="{% url 'home' %}" class="hover:text-green-200 transition duration-300 {% if request.resolver_match.url_name == 'home' %}font-bold text-green-200{% endif %}">Home</a>
-        <a href="{% url 'pricing' %}" class="hover:text-green-200 transition duration-300 {% if request.resolver_match.url_name == 'pricing' %}font-bold text-green-200{% endif %}">Booking</a>
-        <a href="{% url 'about' %}" class="hover:text-green-200 transition duration-300 {% if request.resolver_match.url_name == 'about' %}font-bold text-green-200{% endif %}">About</a>
-        <a href="{% url 'contact' %}" class="hover:text-green-200 transition duration-300 {% if request.resolver_match.url_name == 'contact' %}font-bold text-green-200{% endif %}">Contact</a>
+      <div class="hidden md:flex items-center space-x-7">
+        <a href="{% url 'home' %}" class="text-lg hover:text-green-300 transition duration-300 ease-in-out {% if request.resolver_match.url_name == 'home' %}font-bold text-green-300{% endif %}">Home</a>
+        <a href="{% url 'pricing' %}" class="text-lg hover:text-green-300 transition duration-300 ease-in-out {% if request.resolver_match.url_name == 'pricing' %}font-bold text-green-300{% endif %}">Booking</a>
+        <a href="{% url 'about' %}" class="text-lg hover:text-green-300 transition duration-300 ease-in-out {% if request.resolver_match.url_name == 'about' %}font-bold text-green-300{% endif %}">About</a>
+        <a href="{% url 'contact' %}" class="text-lg hover:text-green-300 transition duration-300 ease-in-out {% if request.resolver_match.url_name == 'contact' %}font-bold text-green-300{% endif %}">Contact</a>
         <!-- Dark Mode Toggle -->
-        <button id="theme-toggle" class="p-2 rounded-full bg-green-600 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300">
-          <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 00-.707-.293H15a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4-4a1 1 0 00-.707-.293H5a1 1 0 000 2h.036a1 1 0 00.707-.293l.707-.707a1 1 0 00-1.414-1.414L4.383 13.54a1 1 0 00.707.293H5a1 1 0 000-2h.036a1 1 0 00.707.293l.707.707zM3 10a1 1 0 01-1-1V9a1 1 0 112 0v1a1 1 0 01-1 1zm-.707-3.536l-.707-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414zm.707-10.607a1 1 0 00.707-.293H5a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707z"></path></svg>
-          <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <button id="theme-toggle" class="p-2 rounded-full bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition duration-300 ease-in-out">
+          <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 00-.707-.293H15a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4-4a1 1 0 00-.707-.293H5a1 1 0 000 2h.036a1 1 0 00.707-.293l.707-.707a1 1 0 00-1.414-1.414L4.383 13.54a1 1 0 00.707.293H5a1 1 0 000-2h.036a1 1 0 00.707.293l.707.707zM3 10a1 1 0 01-1-1V9a1 1 0 112 0v1a1 1 0 01-1 1zm-.707-3.536l-.707-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414zm.707-10.607a1 1 0 00.707-.293H5a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707z"></path></svg>
+          <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8 0 1010.586 10.586z"></path></svg>
         </button>
       </div>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden flex items-center">
         <button id="hamburger-button" class="text-white focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -78,16 +44,16 @@
     </div>
 
     <!-- Mobile Menu (Hidden by default) -->
-    <div id="mobile-menu" class="md:hidden hidden bg-green-800 dark:bg-green-950 mt-4 rounded-md shadow-lg py-2">
-      <a href="{% url 'home' %}" class="block px-4 py-2 text-sm hover:bg-green-600 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'home' %}font-bold text-green-200{% endif %}">Home</a>
-      <a href="{% url 'pricing' %}" class="block px-4 py-2 text-sm hover:bg-green-600 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'pricing' %}font-bold text-green-200{% endif %}">Booking</a>
-      <a href="{% url 'about' %}" class="block px-4 py-2 text-sm hover:bg-green-600 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'about' %}font-bold text-green-200{% endif %}">About</a>
-      <a href="{% url 'contact' %}" class="block px-4 py-2 text-sm hover:bg-green-600 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'contact' %}font-bold text-green-200{% endif %}">Contact</a>
-      <div class="px-4 py-2 border-t border-green-600 dark:border-green-800 flex justify-center mt-2 pt-2">
+    <div id="mobile-menu" class="md:hidden hidden bg-green-900 dark:bg-green-950 mt-4 rounded-lg shadow-xl py-2">
+      <a href="{% url 'home' %}" class="block px-5 py-3 text-base hover:bg-green-700 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'home' %}font-bold text-green-300{% endif %}">Home</a>
+      <a href="{% url 'pricing' %}" class="block px-5 py-3 text-base hover:bg-green-700 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'pricing' %}font-bold text-green-300{% endif %}">Booking</a>
+      <a href="{% url 'about' %}" class="block px-5 py-3 text-base hover:bg-green-700 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'about' %}font-bold text-green-300{% endif %}">About</a>
+      <a href="{% url 'contact' %}" class="block px-5 py-3 text-base hover:bg-green-700 dark:hover:bg-green-800 {% if request.resolver_match.url_name == 'contact' %}font-bold text-green-300{% endif %}">Contact</a>
+      <div class="px-5 py-3 border-t border-green-700 dark:border-green-800 flex justify-center mt-3 pt-3">
         <!-- Dark Mode Toggle for Mobile -->
-        <button id="theme-toggle-mobile" class="p-2 rounded-full bg-green-600 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300">
-          <svg id="theme-toggle-light-icon-mobile" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 00-.707-.293H15a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4-4a1 1 0 00-.707-.293H5a1 1 0 000 2h.036a1 1 0 00.707-.293l.707-.707a1 1 0 00-1.414-1.414L4.383 13.54a1 1 0 00.707.293H5a1 1 0 000-2h.036a1 1 0 00.707.293l.707.707zM3 10a1 1 0 01-1-1V9a1 1 0 112 0v1a1 1 0 01-1 1zm-.707-3.536l-.707-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414zm.707-10.607a1 1 0 00.707-.293H5a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707z"></path></svg>
-          <svg id="theme-toggle-dark-icon-mobile" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <button id="theme-toggle-mobile" class="p-2 rounded-full bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition duration-300 ease-in-out">
+          <svg id="theme-toggle-light-icon-mobile" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 00-.707-.293H15a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4-4a1 1 0 00-.707-.293H5a1 1 0 000 2h.036a1 1 0 00.707-.293l.707-.707a1 1 0 00-1.414-1.414L4.383 13.54a1 1 0 00.707.293H5a1 1 0 000-2h.036a1 1 0 00.707.293l.707.707zM3 10a1 1 0 01-1-1V9a1 1 0 112 0v1a1 1 0 01-1 1zm-.707-3.536l-.707-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414zm.707-10.607a1 1 0 00.707-.293H5a1 1 0 000-2h-.036a1 1 0 00-.707.293l-.707.707a1 1 0 001.414 1.414l.707-.707z"></path></svg>
+          <svg id="theme-toggle-dark-icon-mobile" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8 0 1010.586 10.586z"></path></svg>
         </button>
       </div>
     </div>
@@ -95,48 +61,48 @@
 
   <!-- Messages -->
   {% if messages %}
-    <div class="p-4 container mx-auto mt-4">
+    <div class="p-4 container mx-auto mt-6">
       {% for message in messages %}
-        <div class="bg-green-200 text-green-800 p-3 rounded-md mb-2 shadow-sm dark:bg-green-800 dark:text-green-200" role="alert">
+        <div class="bg-green-100 text-green-800 p-4 rounded-lg shadow-md mb-3 dark:bg-green-900 dark:text-green-200" role="alert">
           {{ message }}
         </div>
       {% endfor %}
     </div>
   {% endif %}
 
-  <main class="flex-grow">
+  <main class="flex-grow py-8">
     {% block content %}{% endblock %}
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-8 px-4 mt-auto dark:bg-gray-800">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+  <footer class="bg-gray-800 text-white py-10 px-4 mt-auto dark:bg-gray-900">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
       <div>
-        <h4 class="text-xl font-bold mb-4 text-green-400">Unity Futsal</h4>
-        <p class="text-gray-400">Your premier destination for futsal excellence.</p>
-        <div class="flex justify-center md:justify-start space-x-4 mt-4">
-          <a href="#" class="text-gray-400 hover:text-white transition duration-300"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/facebook.svg" class="h-6 w-6" alt="Facebook"></a>
-          <a href="#" class="text-gray-400 hover:text-white transition duration-300"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/instagram.svg" class="h-6 w-6" alt="Instagram"></a>
-          <a href="#" class="text-gray-400 hover:text-white transition duration-300"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/twitter.svg" class="h-6 w-6" alt="Twitter"></a>
+        <h4 class="text-2xl font-bold mb-4 text-green-400">Unity Futsal</h4>
+        <p class="text-gray-300 leading-relaxed">Your premier destination for futsal excellence. Join us for the best indoor football experience!</p>
+        <div class="flex justify-center md:justify-start space-x-5 mt-5">
+          <a href="#" class="text-gray-400 hover:text-green-300 transition duration-300 ease-in-out transform hover:scale-110"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/facebook.svg" class="h-7 w-7" alt="Facebook"></a>
+          <a href="#" class="text-gray-400 hover:text-green-300 transition duration-300 ease-in-out transform hover:scale-110"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/instagram.svg" class="h-7 w-7" alt="Instagram"></a>
+          <a href="#" class="text-gray-400 hover:text-green-300 transition duration-300 ease-in-out transform hover:scale-110"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v5/icons/twitter.svg" class="h-7 w-7" alt="Twitter"></a>
         </div>
       </div>
       <div>
-        <h4 class="text-xl font-bold mb-4 text-green-400">Quick Links</h4>
-        <ul class="space-y-2">
-          <li><a href="{% url 'home' %}" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
-          <li><a href="{% url 'pricing' %}" class="text-gray-400 hover:text-white transition duration-300">Booking</a></li>
-          <li><a href="{% url 'about' %}" class="text-gray-400 hover:text-white transition duration-300">About Us</a></li>
-          <li><a href="{% url 'contact' %}" class="text-gray-400 hover:text-white transition duration-300">Contact Us</a></li>
+        <h4 class="text-2xl font-bold mb-4 text-green-400">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="{% url 'home' %}" class="text-gray-300 hover:text-green-300 transition duration-300">Home</a></li>
+          <li><a href="{% url 'pricing' %}" class="text-gray-300 hover:text-green-300 transition duration-300">Booking</a></li>
+          <li><a href="{% url 'about' %}" class="text-gray-300 hover:text-green-300 transition duration-300">About Us</a></li>
+          <li><a href="{% url 'contact' %}" class="text-gray-300 hover:text-green-300 transition duration-300">Contact Us</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="text-xl font-bold mb-4 text-green-400">Contact Info</h4>
-        <p class="text-gray-400">123 Futsal Arena, Sport City</p>
-        <p class="text-gray-400">info@unityfutsal.com</p>
-        <p class="text-gray-400">+1 (123) 456-7890</p>
+        <h4 class="text-2xl font-bold mb-4 text-green-400">Contact Info</h4>
+        <p class="text-gray-300">123 Futsal Arena, Sport City, 54321</p>
+        <p class="text-gray-300">info@unityfutsal.com</p>
+        <p class="text-gray-300">+1 (123) 456-7890</p>
       </div>
     </div>
-    <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
+    <div class="border-t border-gray-700 mt-10 pt-8 text-center text-gray-500 text-sm">
       © {{ now|date:"Y" }} Unity Futsal • All rights reserved
     </div>
   </footer>
