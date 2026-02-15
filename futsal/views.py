@@ -12,13 +12,22 @@ import datetime
 # 1️⃣ HOME PAGE
 def home(request):
     futsal = FutsalInfo.objects.first()
+    
+    # Static images from the static/gallery folder
+    static_gallery_images = [
+        {'static_path': 'gallery/attack.jpg'},
+        {'static_path': 'gallery/ball.jpg'},
+        {'static_path': 'gallery/boot.jpg'},
+        {'static_path': 'gallery/futsal.jpg'},
+        {'static_path': 'gallery/ground.jpeg'},
+    ]
+
     facilities = Facility.objects.all()
-    gallery = GalleryImage.objects.all()
 
     context = {
         'futsal': futsal,
+        'gallery': static_gallery_images,
         'facilities': facilities,
-        'gallery': gallery,
     }
     return render(request, 'futsal/home.html', context)
 
@@ -128,3 +137,15 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'futsal/contact.html', {'futsal': futsal})
+
+
+# 5️⃣ GALLERY PAGE
+def gallery(request):
+    futsal = FutsalInfo.objects.first()
+    gallery = GalleryImage.objects.all()
+
+    context = {
+        'futsal': futsal,
+        'gallery': gallery,
+    }
+    return render(request, 'futsal/gallery.html', context)
