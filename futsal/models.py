@@ -1,4 +1,16 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
+
+def validate_google_map_embed_url(value):
+    url_validator = URLValidator()
+    try:
+        url_validator(value)
+    except ValidationError:
+        raise ValidationError("Enter a valid URL.")
+
+    if not value.startswith("https://www.google.com/maps/embed?pb="):
+        raise ValidationError("Enter a valid Google Maps embed URL (must start with 'https://www.google.com/maps/embed?pb=')")
 
 
 # 1️⃣ FUTSAL BASIC INFO (Home + Contact)
@@ -8,7 +20,7 @@ class FutsalInfo(models.Model):
     phone = models.CharField(max_length=20)
     whatsapp_number = models.CharField(max_length=20)
     address = models.CharField(max_length=300)
-    google_map_link = models.URLField(blank=True)
+    google_map_link = models.URLField(blank=True, validators=[validate_google_map_embed_url])
 
     opening_time = models.CharField(max_length=50)
     closing_time = models.CharField(max_length=50)
